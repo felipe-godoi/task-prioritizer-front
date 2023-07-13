@@ -20,13 +20,15 @@ import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import { DeleteDialog } from './delete-dialog/delete-dialog.component';
+import { InfoDialog } from './info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePage,
     NewTaskDialog,
-    DeleteDialog
+    DeleteDialog,
+    InfoDialog
   ],
   imports: [
     BrowserModule,

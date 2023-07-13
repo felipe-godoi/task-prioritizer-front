@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-delete-dialog',
-  templateUrl: './delete-dialog.component.html',
+  selector: 'app-info-dialog',
+  templateUrl: './info-dialog.component.html',
 })
-export class DeleteDialog {
+export class InfoDialog {
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteDialog>
+    public dialogRef: MatDialogRef<InfoDialog>
   ) { }
 
   onNoClick(): void {

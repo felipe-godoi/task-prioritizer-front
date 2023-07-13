@@ -6,7 +6,6 @@ import { MatSliderChange } from '@angular/material/slider';
 @Component({
   selector: 'app-new-task-dialog',
   templateUrl: './new-task-dialog.component.html',
-  styleUrls: ['./new-task-dialog.component.scss']
 })
 export class NewTaskDialog implements OnInit {
 

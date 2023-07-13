@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
 export class AppService {
   constructor(private http: HttpClient) {}
 
-  apiURL = 'http://localhost:3000';
+  apiURL = 'http://localhost:8000';
 
   async postRequest(url: any, body: any) {
     return new Promise((resolve, reject) => {

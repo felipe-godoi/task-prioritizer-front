@@ -23,6 +23,14 @@ export function ParseLevelToString(param?:Elevel){
   else return 'lowest';
 }
 
+export function ParseStringToLevel(param?:string){
+  if(param == 'highest') return Elevel.highest;
+  else if(param == 'high') return Elevel.high;
+  else if(param == 'medium') return Elevel.medium;
+  else if(param == 'low') return Elevel.low;
+  else return Elevel.lowest;
+}
+
 export enum Elevel {
   lowest,
   low,

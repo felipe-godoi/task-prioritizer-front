@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Elevel, Itask, ParseLevelToIndex, ParseLevelToString, getLevelLabelFeminino, getLevelLabelMasculino } from './task.interface';
+import { Elevel, Itask, ParseLevelToIndex, ParseLevelToString, ParseStringToLevel, getLevelLabelFeminino, getLevelLabelMasculino } from './task.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTaskDialog } from '../new-task-dialog/new-task-dialog.component';
 import { ApiTaskContract } from './api-task-contract.interface';
@@ -10,7 +10,6 @@ import { DeleteDialog } from '../delete-dialog/delete-dialog.component';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
 })
 export class HomePage implements OnInit {
 
@@ -20,51 +19,22 @@ export class HomePage implements OnInit {
   dataSource: Itask[] = [];
   taskBeforeEdit: Itask = <Itask> {};
 
-  taskList: Itask[] = [
-    {
-      description: "Terminar o trabalho de Compiladores",
-      complexity: Elevel.high,
-      impact: Elevel.lowest,
-      relevance: Elevel.low,
-      priority: Elevel.low
-    },
-    {
-      description: "Terminar o trabalho de Compiladores",
-      complexity: Elevel.high,
-      impact: Elevel.lowest,
-      relevance: Elevel.low,
-      priority: Elevel.lowest
-    },
-    {
-      description: "Terminar o trabalho de Compiladores",
-      complexity: Elevel.high,
-      impact: Elevel.lowest,
-      relevance: Elevel.low,
-      priority: Elevel.medium
-    },
-    {
-      description: "Terminar o trabalho de Inteligência Artificial",
-      complexity: Elevel.high,
-      impact: Elevel.medium,
-      relevance: Elevel.high,
-      priority: Elevel.highest
-    },
-    {
-      description: "Trabalhar",
-      complexity: Elevel.high,
-      impact: Elevel.highest,
-      relevance: Elevel.highest,
-      priority: Elevel.high
-    },
-  ];
+  taskList: Itask[] = [];
 
-  ngOnInit(): void {
-    this.refreshDataSource(this.taskList);
+  async ngOnInit(): Promise<void> {
+    await this.getTaskListFromApi();
   }
 
   async getTaskListFromApi(){
     let apiResponse: any = await this.httpService.getRequest('/tasks');
-    console.log(apiResponse.data);
+    this.taskList = apiResponse || [];
+    this.taskList.forEach((element: any) => {
+      element.complexity = ParseStringToLevel(element.complexity);
+      element.relevance = ParseStringToLevel(element.relevance);
+      element.impact = ParseStringToLevel(element.impact);
+      if(element.priority) element.priority = ParseStringToLevel(element.priority);
+    });
+    this.refreshDataSource(this.taskList);
   }
 
   refreshDataSource(taskList: Itask[]){
@@ -84,7 +54,6 @@ export class HomePage implements OnInit {
   getLevelLabelM(param:Elevel){
     return getLevelLabelMasculino(param);
   }
-
 
   newTask(){
     let newTask: Itask = {
@@ -117,6 +86,7 @@ export class HomePage implements OnInit {
       if(!isNewTask) this.httpService.deleteRequest('/tasks', { description: this.taskBeforeEdit.description})
 
       this.httpService.postRequest('/tasks', body);
+      this.ngOnInit();
     });
   }
 
@@ -126,6 +96,15 @@ export class HomePage implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) this.httpService.deleteRequest('/tasks', {description: task.description});
+      this.ngOnInit();
     });
+  }
+
+  chooseBackgroundColor(task: Itask){
+    if(task.priority == Elevel.highest) return 'highest';
+    else if(task.priority == Elevel.high) return 'high';
+    else if(task.priority == Elevel.medium) return 'medium';
+    else if(task.priority == Elevel.low) return 'low';
+    else return 'lowest';
   }
 }
