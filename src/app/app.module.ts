@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import { DeleteDialog } from './delete-dialog/delete-dialog.component';
 import { InfoDialog } from './info-dialog/info-dialog.component';
+import { InterceptorModule } from './interceptors/interceptor.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { InfoDialog } from './info-dialog/info-dialog.component';
     MatInputModule,
     MatSliderModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    InterceptorModule,
+    MatProgressSpinnerModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent],

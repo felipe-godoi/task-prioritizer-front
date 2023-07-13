@@ -4,6 +4,13 @@
   </div>
 </nav> -->
 
+<div *ngIf="loading" class="loading-container">
+  <mat-progress-spinner
+    color="primary"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
 <nav class="navbar bg-body-tertiary" style="background-color: #0d1f49 !important;">
   <div class="container-fluid" style="max-width: 1200px;">
     <span class="navbar-brand mb-0 h1" style="color: white;">Task Prioritzer</span>

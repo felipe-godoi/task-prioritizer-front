@@ -83,10 +83,13 @@ export class HomePage implements OnInit {
         impact: ParseLevelToString(result.impact),
         relevance: ParseLevelToString(result.relevance),
       }
-      if(!isNewTask) this.httpService.deleteRequest('/tasks', { description: this.taskBeforeEdit.description})
+      if(!isNewTask) this.httpService.deleteRequest('/tasks', { description: this.taskBeforeEdit.description}).then((res) => {
+        this.ngOnInit();
+      })
 
-      this.httpService.postRequest('/tasks', body);
-      this.ngOnInit();
+      this.httpService.postRequest('/tasks', body).then((res) => {
+        this.ngOnInit();
+      });
     });
   }
 
@@ -95,8 +98,9 @@ export class HomePage implements OnInit {
       width: '450px'
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result) this.httpService.deleteRequest('/tasks', {description: task.description});
-      this.ngOnInit();
+      if(result) this.httpService.deleteRequest('/tasks', {description: task.description}).then((res) => {
+        this.ngOnInit();
+      });
     });
   }
 
