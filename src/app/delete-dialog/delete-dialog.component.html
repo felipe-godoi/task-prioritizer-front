@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="text-secondary">Remover Tarefa</h2>
+<mat-dialog-content class="mat-typography pb-2">
+  <div>
+    <span>Tem certeza que deseja remover a tarefa selecionada ?</span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()" mat-dialog-close>Cancelar</button>
+  <button mat-button class="btn btn-danger" (click)="onYesClick()" cdkFocusInitial>Confirmar Remoção</button>
+</mat-dialog-actions>

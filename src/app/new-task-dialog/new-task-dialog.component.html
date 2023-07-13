@@ -1,0 +1,58 @@
+<h2 mat-dialog-title class="text-secondary">Cadastrar Nova Tarefa</h2>
+<mat-dialog-content class="mat-typography pb-2">
+  <div class="row mb-3">
+    <div class="col-12" style="margin-left: auto; margin-right: auto">
+      <label>Descrição*</label>
+      <input type="text" class="form-control" [(ngModel)]="description" />
+      <small>Campo de preenchimento obrigatório!</small>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-4" style="margin-left: auto; margin-top:auto; margin-bottom: auto; text-align: right;">
+      <span>Complexidade:</span>
+    </div>
+    <div class="col-sm-4" style="text-align: center;">
+      <mat-slider name="complexity" placeholder="complexity" min="1" max="5" step="1" value="{{complexity}}" (input)="onComplexityChange($event)">
+        <input matSliderThumb>
+      </mat-slider>
+    </div>
+    <div class="col-sm-4" style="margin-right: auto; margin-top:auto; margin-bottom: auto;">
+      <span>{{complexityLabel}}</span>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-4" style="margin-left: auto; margin-top:auto; margin-bottom: auto; text-align: right;">
+      <span>Relevância:</span>
+    </div>
+    <div class="col-sm-4" style="text-align: center;">
+      <mat-slider name="relevance" placeholder="relevance" min="1" max="5" step="1" value="{{relevance}}" (input)="onRelevanceChange($event)">
+        <input matSliderThumb>
+      </mat-slider>
+    </div>
+    <div class="col-sm-4" style="margin-right: auto; margin-top:auto; margin-bottom: auto;">
+      <span>{{relevanceLabel}}</span>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-4" style="margin-left: auto; margin-top:auto; margin-bottom: auto; text-align: right;">
+      <span>Impacto:</span>
+    </div>
+    <div class="col-sm-4" style="text-align: center;">
+      <mat-slider name="impact" placeholder="impact" min="1" max="5" step="1" value="{{impact}}" (input)="onImpactChange($event)">
+        <input matSliderThumb>
+      </mat-slider>
+    </div>
+    <div class="col-sm-4" style="margin-right: auto;  margin-top:auto; margin-bottom: auto;">
+      <span>{{impactLabel}}</span>
+    </div>
+  </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()" mat-dialog-close>Cancelar</button>
+  <button mat-button class="btn btn-secondary" (click)="onSaveClick()" [disabled]="disableSaveButton()" cdkFocusInitial>Salvar</button>
+</mat-dialog-actions>

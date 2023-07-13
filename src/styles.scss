@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.icon-color{
+  color: #6c757d;
+  transition: 0.1s;
+}
+
+.icon-color:hover{
+  color: #5c636a;
+  transition: 0.1s;
+}
